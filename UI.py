@@ -67,6 +67,15 @@ def update_songs_list():
     for idx, song in enumerate(audio_files, start=1):
         songs_listbox.insert(tk.END, f"{idx}. {song}")
 
+# Function to change the background image
+def change_background():
+    image_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png")])
+    if image_path:
+        new_image = Image.open(image_path)
+        background_image = ImageTk.PhotoImage(new_image)
+        background_label.config(image=background_image)
+        background_label.image = background_image
+
 # Create a tkinter GUI
 root = tk.Tk()
 root.title("Music Player")
@@ -142,5 +151,9 @@ def update_timer():
 
 # Start the timer update loop
 update_timer()
+
+# Browse button for changing background
+change_background_button = tk.Button(root, text="Change Background", command=change_background, bg='#FFA07A', fg='black')
+change_background_button.pack(pady=5)
 
 root.mainloop()
